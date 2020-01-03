@@ -1,1 +1,3 @@
 rootProject.name = 'tsundoku'
+
+include 'tsundoku-backend-service'
