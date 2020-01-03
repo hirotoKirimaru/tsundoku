@@ -12,17 +12,3 @@ services:
         hostname: postgres
         restart: always
 
-    pgadmin4:
-        image: dpage/pgadmin4:latest
-        container_name: pgadmin4
-        ports:
-            - 8001:80
-        volumes:
-            - ./pgadmin:/var/lib/pgadmin
-        environment:
-            PGADMIN_DEFAULT_EMAIL: pgadmin
-            PGADMIN_DEFAULT_PASSWORD: pgadmin
-        hostname: pgadmin4
-        depends_on:
-            - postgres
-        restart: always
