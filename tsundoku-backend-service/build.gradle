@@ -4,6 +4,7 @@ plugins {
     id 'java'
     id "org.sonarqube" version "2.8"
     id "jacoco"
+    id "org.openapi.generator" version "4.2.1"
 }
 
 group = 'jp.co.kelly'
@@ -60,4 +61,21 @@ sonarqube {
         property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
         property "sonar.exclusions", "**/dto/**"
     }
+}
+
+openApiGenerate {
+    generatorName = "spring"
+    inputSpec = "$rootDir/reference/index.yaml".toString()
+    outputDir = "$rootDir/tsundoku-backend-service".toString()
+    apiPackage = "jp.co.kelly.restapi"
+    invokerPackage = "jp.co.kelly.restapi"
+    modelPackage = "jp.co.kelly.restapi.dto"
+    configOptions = [
+            dateLibrary         : "java8-localdatetune",
+            interfaceOnly       : "true",
+            skipDefaultInterface: "true",
+    ]
+    systemProperties = [
+            modelDocs: 'false'
+    ]
 }

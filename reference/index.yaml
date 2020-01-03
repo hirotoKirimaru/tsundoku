@@ -1,0 +1,33 @@
+openapi: 3.0.0
+info:
+  title: tsundokuApplication
+  version: 1.0.0
+  description: '図書館アプリのライブラリ'
+servers:
+  - url: 'http://localhost:8080/api/v1'
+    description: local Server
+paths:
+  /books:
+    get:
+      tags:
+        - books
+      summary: 本を検索する
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/booksDto"
+
+components:
+  schemas:
+    booksDto:
+      title: booksDto
+      type: object
+      description: 本の検索結果オブジェクト
+      properties:
+        isbns:
+          type: array
+          items:
+            type: string
