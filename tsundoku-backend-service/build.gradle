@@ -1,16 +1,63 @@
 plugins {
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'java'
+    id "org.sonarqube" version "2.8"
+    id "jacoco"
 }
 
-group 'jp.co.kelly'
-version '0.0.1-SNAPSHOT'
+group = 'jp.co.kelly'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
 
-sourceCompatibility = 1.8
+configurations {
+    developmentOnly
+    runtimeClasspath {
+        extendsFrom developmentOnly
+    }
+}
 
 repositories {
     mavenCentral()
 }
 
+ext {
+    set('springBootAdminVersion', "2.2.1")
+}
+
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'de.codecentric:spring-boot-admin-starter-server'
+    implementation 'org.flywaydb:flyway-core'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.1'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'org.postgresql:postgresql'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'org.springframework.security:spring-security-test'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "de.codecentric:spring-boot-admin-dependencies:${springBootAdminVersion}"
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "hirotoKirimaru_tsundoku"
+        property "sonar.organization", "hirotokirimaru-github"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.login", "e5135d7beaa2770905acf5af5a5d8b4d097c1cb6"
+        property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
+        property "sonar.exclusions", "**/dto/**"
+    }
 }
