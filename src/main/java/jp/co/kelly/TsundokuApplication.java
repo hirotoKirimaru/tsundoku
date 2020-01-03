@@ -1,13 +1,13 @@
-package jp.co.kelly.bookReadLimit;
+package jp.co.kelly;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BookReadLimitApplication {
+public class TsundokuApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BookReadLimitApplication.class, args);
+		SpringApplication.run(TsundokuApplication.class, args);
 	}
 
 }
