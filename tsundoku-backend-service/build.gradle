@@ -40,6 +40,8 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     testImplementation 'org.springframework.security:spring-security-test'
+
+    implementation 'org.openapitools:openapi-generator-gradle-plugin:4.2.0'
 }
 
 dependencyManagement {
